@@ -1,0 +1,19 @@
+{
+  "tasks": [
+    {
+      "id": "f089",
+      "title": "Прекрасный код",
+      "completed": false
+    },
+    {
+      "id": "c0a8",
+      "title": "Покрытие тестами",
+      "completed": false
+    },
+    {
+      "id": "b36f",
+      "title": "qwew",
+      "completed": false
+    }
+  ]
+}
