@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useRemoveCompleted from "./useRemoveCompleted";
 import useToggleComplete from "./useToggleComplete";
 import { RootState } from "../store";
-import { setTasks } from "../store/tasksReducer";
+import { setTasks, Task } from "../store/tasksReducer";
 
 interface useTasksActionsProps {
   taskText: string;
@@ -24,32 +24,36 @@ const useTasksActions = ({
 
     if (taskText.trim() === "") return;
 
-    try {
-      const newTask = {
-        title: taskText,
-        completed: false,
-      };
+    const tempTask: Task = {
+      id: Date.now().toString(),
+      title: taskText,
+      completed: false,
+    };
 
-      const res = await fetch(`https://test-task-proxy.onrender.com/tasks`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newTask),
-      });
+    dispatch(setTasks([...tasks, tempTask]));
+    setTaskText("");
 
-      const createdTask = await res.json();
+    (async () => {
+      try {
+        const res = await fetch(`https://test-task-proxy.onrender.com/tasks`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(tempTask),
+        });
 
-      dispatch(setTasks([...tasks, createdTask]));
+        const createdTask = await res.json();
 
-      if (!res.ok) {
-        throw new Error("Failed to create task");
+        dispatch(setTasks([...tasks, createdTask]));
+
+        if (!res.ok) {
+          throw new Error("Failed to create task");
+        }
+      } catch (e) {
+        console.error(e);
       }
-
-      setTaskText("");
-    } catch (e) {
-      console.error(e);
-    }
+    })();
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
