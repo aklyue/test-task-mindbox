@@ -88,7 +88,7 @@ describe("useToggleComplete", () => {
     });
 
     expect(global.fetch).toHaveBeenCalledWith(
-      "http://localhost:3001/tasks/1",
+      "https://test-task-proxy.onrender.com/tasks/1",
       expect.objectContaining({
         method: "PATCH",
         body: JSON.stringify({ completed: true }),

@@ -30,7 +30,7 @@ const useTasksActions = ({
         completed: false,
       };
 
-      const res = await fetch(`http://localhost:3001/tasks`, {
+      const res = await fetch(`https://test-task-proxy.onrender.com/tasks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

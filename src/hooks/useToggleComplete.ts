@@ -6,7 +6,7 @@ const useToggleComplete = () => {
 
   const toggleTaskComplete = async (taskId: string, taskCompleted: boolean) => {
     try {
-      const response = await fetch(`http://localhost:3001/tasks/${taskId}`, {
+      const response = await fetch(`https://test-task-proxy.onrender.com/tasks/${taskId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

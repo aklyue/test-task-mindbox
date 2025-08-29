@@ -8,7 +8,7 @@ const useFetchTasks = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const res = await fetch("http://localhost:3001/tasks");
+        const res = await fetch("https://test-task-proxy.onrender.com/tasks");
         if (!res.ok) {
           throw new Error("Failed to fetch tasks");
         }

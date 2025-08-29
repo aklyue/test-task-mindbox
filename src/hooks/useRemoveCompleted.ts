@@ -6,12 +6,12 @@ const useRemoveCompleted = () => {
 
   const removeCompletedTasks = async () => {
     try {
-      const response = await fetch("http://localhost:3001/tasks");
+      const response = await fetch("https://test-task-proxy.onrender.com/tasks");
       const tasks: Task[] = await response.json();
 
       const completedTasks = tasks.filter((task) => task.completed);
       const deleteRequests = completedTasks.map((task) =>
-        fetch(`http://localhost:3001/tasks/${task.id}`, {
+        fetch(`https://test-task-proxy.onrender.com/tasks/${task.id}`, {
           method: "DELETE",
         })
       );
